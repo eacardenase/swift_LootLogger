@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A5EA03242DE3D91100C4C004 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A5EA03232DE3D91100C4C004 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A5EA03062DE3D90800C4C004 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		A5EA02EF2DE3D90600C4C004 /* LootLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LootLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5EA03052DE3D90800C4C004 /* LootLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LootLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5EA030F2DE3D90800C4C004 /* LootLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LootLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5EA03232DE3D91100C4C004 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +93,7 @@
 		A5EA02E62DE3D90600C4C004 = {
 			isa = PBXGroup;
 			children = (
+				A5EA03232DE3D91100C4C004 /* README.md */,
 				A5EA02F12DE3D90600C4C004 /* LootLogger */,
 				A5EA03082DE3D90800C4C004 /* LootLoggerTests */,
 				A5EA03122DE3D90800C4C004 /* LootLoggerUITests */,
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5EA03242DE3D91100C4C004 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
