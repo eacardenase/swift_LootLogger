@@ -1,0 +1,12 @@
+//
+//  ItemStore.swift
+//  LootLogger
+//
+//  Created by Edwin Cardenas on 5/26/25.
+//
+
+import Foundation
+
+class ItemStore {
+    private(set) var allItems = [Item]()
+}
