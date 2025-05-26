@@ -9,4 +9,12 @@ import Foundation
 
 class ItemStore {
     private(set) var allItems = [Item]()
+    
+    @discardableResult func createItem() -> Item {
+        let newItem = Item(random: true)
+        
+        allItems.append(newItem)
+        
+        return newItem
+    }
 }
