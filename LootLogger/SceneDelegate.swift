@@ -20,8 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
+        let itemStore = ItemStore()
+        
+        let itemsViewController = ItemsViewController()
+        itemsViewController.itemStore = itemStore
+        
         window?.makeKeyAndVisible()
-        window?.rootViewController = ItemsViewController()
+        window?.rootViewController = itemsViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
