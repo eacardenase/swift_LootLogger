@@ -31,8 +31,11 @@ extension ItemsViewController {
         let allItems = itemStore.allItems
         let currentItem = allItems[indexPath.row]
         
-        cell.textLabel?.text = currentItem.name
-        cell.detailTextLabel?.text = "$\(currentItem.valueInDollars)"
+        var content = UIListContentConfiguration.valueCell()
+        content.text = currentItem.name
+        content.secondaryText = "$\(currentItem.valueInDollars)"
+        
+        cell.contentConfiguration = content
         
         return cell
     }
