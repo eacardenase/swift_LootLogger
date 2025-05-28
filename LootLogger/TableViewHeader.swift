@@ -7,12 +7,18 @@
 
 import UIKit
 
-class TableViewHeaderView: UIView {
+protocol TableViewHeaderDelegate {
+    func toggleEditingMode(_ sender: UIButton)
+    func addNewItem(_ sender: UIButton)
+}
+
+class TableViewHeader: UIView {
     
     var editButton: UIButton = {
         let button = UIButton(type: .system)
         
         button.setTitle("Edit", for: .normal)
+        button.addTarget(self, action: #selector(handleEditButtonTap), for: .touchUpInside)
         
         return button
     }()
@@ -21,9 +27,12 @@ class TableViewHeaderView: UIView {
         let button = UIButton(type: .system)
         
         button.setTitle("Add", for: .normal)
+        button.addTarget(self, action: #selector(handleAddButtonTap), for: .touchUpInside)
         
         return button
     }()
+    
+    var delegate: TableViewHeaderDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,4 +64,16 @@ class TableViewHeaderView: UIView {
         ])
     }
     
+}
+
+// MARK: Actions
+
+extension TableViewHeader {
+    @objc func handleEditButtonTap(_ sender: UIButton) {
+        delegate?.toggleEditingMode(sender)
+    }
+    
+    @objc func handleAddButtonTap(_ sender: UIButton) {
+        delegate?.addNewItem(sender)
+    }
 }

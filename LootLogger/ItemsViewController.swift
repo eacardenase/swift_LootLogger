@@ -11,8 +11,8 @@ class ItemsViewController: UITableViewController {
     
     var itemStore: ItemStore!
     
-    var headerView: TableViewHeaderView = {
-        let view = TableViewHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
+    var headerView: TableViewHeader = {
+        let view = TableViewHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
         
         return view
     }()
@@ -20,6 +20,7 @@ class ItemsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        headerView.delegate = self
         tableView.tableHeaderView = headerView
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
@@ -52,4 +53,18 @@ extension ItemsViewController {
 // MARK: - UITableViewDelegate
 
 extension ItemsViewController {
+}
+
+// MARK: - TableViewHeaderDelegate
+
+extension ItemsViewController: TableViewHeaderDelegate {
+
+    func toggleEditingMode(_ sender: UIButton) {
+        print("DEBUG: \(#function) was called.")
+    }
+    
+    func addNewItem(_ sender: UIButton) {
+        print("DEBUG: \(#function) was called.")
+    }
+    
 }
