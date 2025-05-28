@@ -11,8 +11,16 @@ class ItemsViewController: UITableViewController {
     
     var itemStore: ItemStore!
     
+    var headerView: TableViewHeaderView = {
+        let view = TableViewHeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 60))
+        
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableHeaderView = headerView
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
     }
