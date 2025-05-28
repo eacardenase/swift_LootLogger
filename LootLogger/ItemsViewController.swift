@@ -60,7 +60,15 @@ extension ItemsViewController {
 extension ItemsViewController: TableViewHeaderDelegate {
 
     func toggleEditingMode(_ sender: UIButton) {
-        print("DEBUG: \(#function) was called.")
+        if isEditing {
+            sender.setTitle("Edit", for: .normal)
+            
+            setEditing(false, animated: true)
+        } else {
+            sender.setTitle("Done", for: .normal)
+            
+            setEditing(true, animated: true)
+        }
     }
     
     func addNewItem(_ sender: UIButton) {
