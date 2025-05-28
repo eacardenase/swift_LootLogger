@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Item {
+class Item: Equatable {
     var name: String
     var valueInDollars: Int
     var serialNumber: String?
@@ -38,5 +38,12 @@ class Item {
         } else {
             self.init(name: "", serialNumber: nil, valueInDollars: 0)
         }
+    }
+    
+    static func ==(lhs: Item, rhs: Item) -> Bool {
+        return lhs.name == rhs.name
+            && lhs.serialNumber == rhs.serialNumber
+            && lhs.valueInDollars == rhs.valueInDollars
+            && lhs.dateCreated == rhs.dateCreated
     }
 }

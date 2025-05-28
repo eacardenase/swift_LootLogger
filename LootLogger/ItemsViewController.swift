@@ -72,7 +72,12 @@ extension ItemsViewController: TableViewHeaderDelegate {
     }
     
     func addNewItem(_ sender: UIButton) {
-        print("DEBUG: \(#function) was called.")
+        let newItem = itemStore.createItem()
+        
+        if let index = itemStore.allItems.firstIndex(of: newItem) {
+            let indexPath = IndexPath(row: index, section: 0)
+
+            tableView.insertRows(at: [indexPath], with: .fade)
+        }
     }
-    
 }
