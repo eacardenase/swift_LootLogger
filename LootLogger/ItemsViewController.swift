@@ -31,14 +31,27 @@ class ItemsViewController: UITableViewController {
 
 extension ItemsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemStore.allItems.count
+        if section == 0 {
+            return itemStore.allItems.count { $0.valueInDollars <= 50 }
+        }
+        
+        return itemStore.allItems.count { $0.valueInDollars > 50 }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let section = indexPath.section
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UITableViewCell.self), for: indexPath)
         
-        let allItems = itemStore.allItems
-        let currentItem = allItems[indexPath.row]
+        let items: [Item]
+        
+        
+        if section == 0 {
+            items = itemStore.allItems.filter({ $0.valueInDollars <= 50 })
+        } else {
+            items = itemStore.allItems.filter({ $0.valueInDollars > 50 })
+        }
+        
+        let currentItem = items[indexPath.row]
         
         var content = UIListContentConfiguration.valueCell()
         content.text = currentItem.name
@@ -61,6 +74,18 @@ extension ItemsViewController {
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "<= $50"
+        }
+        
+        return "> $50"
     }
 }
 
@@ -87,9 +112,19 @@ extension ItemsViewController: TableViewHeaderDelegate {
     
     func addNewItem(_ sender: UIButton) {
         let newItem = itemStore.createItem()
+        let isItemValueLessThanOrEqualTo50 = newItem.valueInDollars <= 50
+        let sectionIndex = newItem.valueInDollars <= 50 ? 0 : 1
         
-        if let index = itemStore.allItems.firstIndex(of: newItem) {
-            let indexPath = IndexPath(row: index, section: 0)
+        let items: [Item]
+        
+        if isItemValueLessThanOrEqualTo50 {
+            items = itemStore.allItems.filter({ $0.valueInDollars <= 50 })
+        } else {
+            items = itemStore.allItems.filter({ $0.valueInDollars > 50 })
+        }
+        
+        if let index = items.firstIndex(of: newItem) {
+            let indexPath = IndexPath(row: index, section: sectionIndex)
 
             tableView.insertRows(at: [indexPath], with: .fade)
         }
