@@ -82,10 +82,10 @@ extension ItemsViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "<= $50"
+            return "Less than or equal to $50"
         }
         
-        return "> $50"
+        return "More than $50"
     }
 }
 
