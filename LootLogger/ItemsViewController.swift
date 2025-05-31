@@ -62,6 +62,16 @@ extension ItemsViewController {
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let favoriteAction = UIContextualAction(style: .normal, title: "Favorite") { _, _, completion in
+            print("DEBUG: \(#function)")
+            
+            completion(true)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [favoriteAction])
+    }
 }
 
 // MARK: - UITableViewDelegate
