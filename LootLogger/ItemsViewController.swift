@@ -23,7 +23,7 @@ class ItemsViewController: UITableViewController {
         headerView.delegate = self
         tableView.tableHeaderView = headerView
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
+        tableView.register(ItemCell.self, forCellReuseIdentifier: NSStringFromClass(ItemCell.self))
     }
 }
 
@@ -35,16 +35,15 @@ extension ItemsViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(UITableViewCell.self), for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(ItemCell.self), for: indexPath)
+                as? ItemCell else { fatalError("Error with ItemCell") }
         
         let allItems = itemStore.allItems
         let currentItem = allItems[indexPath.row]
         
-        var content = UIListContentConfiguration.valueCell()
-        content.text = currentItem.name
-        content.secondaryText = "$\(currentItem.valueInDollars)"
-        
-        cell.contentConfiguration = content
+        cell.nameLabel.text = currentItem.name
+        cell.serialNumberLabel.text = currentItem.serialNumber
+        cell.valueLabel.text = "$\(currentItem.valueInDollars)"
         
         return cell
     }
@@ -72,7 +71,7 @@ extension ItemsViewController {
 // MARK: - TableViewHeaderDelegate
 
 extension ItemsViewController: TableViewHeaderDelegate {
-
+    
     func toggleEditingMode(_ sender: UIButton) {
         if isEditing {
             sender.setTitle("Edit", for: .normal)
@@ -90,7 +89,7 @@ extension ItemsViewController: TableViewHeaderDelegate {
         
         if let index = itemStore.allItems.firstIndex(of: newItem) {
             let indexPath = IndexPath(row: index, section: 0)
-
+            
             tableView.insertRows(at: [indexPath], with: .fade)
         }
     }

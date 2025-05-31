@@ -10,10 +10,10 @@ import Foundation
 class Item: Equatable {
     var name: String
     var valueInDollars: Int
-    var serialNumber: String?
+    var serialNumber: String
     let dateCreated: Date
     
-    init(name: String, serialNumber: String?, valueInDollars: Int) {
+    init(name: String, serialNumber: String, valueInDollars: Int) {
         self.name = name
         self.valueInDollars = valueInDollars
         self.serialNumber = serialNumber
@@ -36,7 +36,7 @@ class Item: Equatable {
                       serialNumber: randomSerialNumber,
                       valueInDollars: randomValue)
         } else {
-            self.init(name: "", serialNumber: nil, valueInDollars: 0)
+            self.init(name: "", serialNumber: "", valueInDollars: 0)
         }
     }
     
