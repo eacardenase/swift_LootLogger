@@ -14,6 +14,7 @@ class ItemCell: UITableViewCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 0
         
         return label
     }()
@@ -63,6 +64,7 @@ extension ItemCell {
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            stackView.trailingAnchor.constraint(lessThanOrEqualTo: valueLabel.leadingAnchor, constant: 8),
             
             valueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             valueLabel.centerYAnchor.constraint(equalTo: stackView.centerYAnchor)

@@ -44,6 +44,7 @@ extension ItemsViewController {
         cell.nameLabel.text = currentItem.name
         cell.serialNumberLabel.text = currentItem.serialNumber
         cell.valueLabel.text = "$\(currentItem.valueInDollars)"
+        cell.valueLabel.textColor = currentItem.valueInDollars >= 50 ? .systemRed : .systemGreen
         
         return cell
     }
