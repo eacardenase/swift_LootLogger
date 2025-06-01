@@ -37,6 +37,12 @@ class ItemsViewController: UITableViewController {
             forCellReuseIdentifier: NSStringFromClass(ItemCell.self)
         )
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
 }
 
 // MARK: - UITableViewDataSource

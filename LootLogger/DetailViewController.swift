@@ -10,22 +10,22 @@ import UIKit
 class DetailViewController: UIViewController {
 
     var item: Item
-    
+
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
-        
+
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
-        
+
         return formatter
     }()
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        
+
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
-        
+
         return formatter
     }()
 
@@ -80,7 +80,9 @@ class DetailViewController: UIViewController {
     lazy var valueField: UITextField = {
         let textField = UITextField()
 
-        textField.text = numberFormatter.string(from: NSNumber(value: item.valueInDollars))
+        textField.text = numberFormatter.string(
+            from: NSNumber(value: item.valueInDollars)
+        )
         textField.borderStyle = .roundedRect
         textField.setContentCompressionResistancePriority(
             UILayoutPriority(749),
@@ -120,6 +122,21 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        item.name = nameField.text ?? ""
+        item.serialNumber = serialNumberField.text ?? ""
+
+        if let valueText = valueField.text,
+            let value = numberFormatter.number(from: valueText)
+        {
+            item.valueInDollars = value.intValue
+        } else {
+            item.valueInDollars = 0
+        }
+    }
 }
 
 extension DetailViewController {
@@ -130,34 +147,34 @@ extension DetailViewController {
         nameStackView.translatesAutoresizingMaskIntoConstraints = false
         nameStackView.axis = .horizontal
         nameStackView.spacing = 8
-        
+
         let serialStackView = UIStackView(arrangedSubviews: [
             serialLabel, serialNumberField,
         ])
         serialStackView.translatesAutoresizingMaskIntoConstraints = false
         serialStackView.axis = .horizontal
         serialStackView.spacing = 8
-        
+
         let valueStackView = UIStackView(arrangedSubviews: [
             valueLabel, valueField,
         ])
         valueStackView.translatesAutoresizingMaskIntoConstraints = false
         valueStackView.axis = .horizontal
         valueStackView.spacing = 8
-        
+
         let verticalStackView = UIStackView(arrangedSubviews: [
             nameStackView,
             serialStackView,
             valueStackView,
             dateLabel,
         ])
-        
+
         verticalStackView.axis = .vertical
         verticalStackView.spacing = 8
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         view.addSubview(verticalStackView)
-        
+
         // verticalStackView
         NSLayoutConstraint.activate([
             verticalStackView.topAnchor.constraint(
@@ -177,7 +194,7 @@ extension DetailViewController {
                 constant: -16
             ),
         ])
-        
+
         // nameField
         NSLayoutConstraint.activate([
             nameField.leadingAnchor.constraint(
