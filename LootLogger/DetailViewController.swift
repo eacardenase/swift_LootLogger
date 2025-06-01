@@ -10,6 +10,24 @@ import UIKit
 class DetailViewController: UIViewController {
 
     var item: Item
+    
+    let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        
+        return formatter
+    }()
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        
+        return formatter
+    }()
 
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -62,7 +80,7 @@ class DetailViewController: UIViewController {
     lazy var valueField: UITextField = {
         let textField = UITextField()
 
-        textField.text = "\(item.valueInDollars)"
+        textField.text = numberFormatter.string(from: NSNumber(value: item.valueInDollars))
         textField.borderStyle = .roundedRect
         textField.setContentCompressionResistancePriority(
             UILayoutPriority(749),
@@ -74,7 +92,7 @@ class DetailViewController: UIViewController {
     lazy var dateLabel: UILabel = {
         let label = UILabel()
 
-        label.text = item.dateCreated.ISO8601Format()
+        label.text = dateFormatter.string(from: item.dateCreated)
         label.textAlignment = .center
         label.setContentHuggingPriority(.defaultLow, for: .vertical)
 
