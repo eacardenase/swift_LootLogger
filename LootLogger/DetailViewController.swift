@@ -84,6 +84,7 @@ class DetailViewController: UIViewController {
             from: NSNumber(value: item.valueInDollars)
         )
         textField.borderStyle = .roundedRect
+        textField.keyboardType = .decimalPad
         textField.setContentCompressionResistancePriority(
             UILayoutPriority(749),
             for: .horizontal
