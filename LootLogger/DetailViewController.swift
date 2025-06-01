@@ -114,40 +114,50 @@ class DetailViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
 
+        setupViews()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
+extension DetailViewController {
+    private func setupViews() {
         let nameStackView = UIStackView(arrangedSubviews: [
             nameLabel, nameField,
         ])
         nameStackView.translatesAutoresizingMaskIntoConstraints = false
         nameStackView.axis = .horizontal
         nameStackView.spacing = 8
-
+        
         let serialStackView = UIStackView(arrangedSubviews: [
             serialLabel, serialNumberField,
         ])
         serialStackView.translatesAutoresizingMaskIntoConstraints = false
         serialStackView.axis = .horizontal
         serialStackView.spacing = 8
-
+        
         let valueStackView = UIStackView(arrangedSubviews: [
             valueLabel, valueField,
         ])
         valueStackView.translatesAutoresizingMaskIntoConstraints = false
         valueStackView.axis = .horizontal
         valueStackView.spacing = 8
-
+        
         let verticalStackView = UIStackView(arrangedSubviews: [
             nameStackView,
             serialStackView,
             valueStackView,
             dateLabel,
         ])
-
+        
         verticalStackView.axis = .vertical
         verticalStackView.spacing = 8
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         view.addSubview(verticalStackView)
-
+        
         // verticalStackView
         NSLayoutConstraint.activate([
             verticalStackView.topAnchor.constraint(
@@ -167,7 +177,7 @@ class DetailViewController: UIViewController {
                 constant: -16
             ),
         ])
-
+        
         // nameField
         NSLayoutConstraint.activate([
             nameField.leadingAnchor.constraint(
@@ -177,9 +187,5 @@ class DetailViewController: UIViewController {
                 equalTo: valueField.leadingAnchor
             ),
         ])
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 }
