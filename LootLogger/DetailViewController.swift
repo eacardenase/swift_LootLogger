@@ -42,6 +42,7 @@ class DetailViewController: UIViewController {
 
         textField.text = item.name
         textField.borderStyle = .roundedRect
+        textField.delegate = self
         textField.setContentCompressionResistancePriority(
             UILayoutPriority(749),
             for: .horizontal
@@ -62,6 +63,7 @@ class DetailViewController: UIViewController {
 
         textField.text = item.serialNumber
         textField.borderStyle = .roundedRect
+        textField.delegate = self
         textField.setContentCompressionResistancePriority(
             UILayoutPriority(749),
             for: .horizontal
@@ -205,5 +207,15 @@ extension DetailViewController {
                 equalTo: valueField.leadingAnchor
             ),
         ])
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension DetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
     }
 }
