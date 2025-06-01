@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
         let label = UILabel()
         
         label.text = "Name"
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         return label
     }()
@@ -104,6 +105,9 @@ class DetailViewController: UIViewController {
             verticalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             verticalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             verticalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            
+            nameField.leadingAnchor.constraint(equalTo: serialNumberField.leadingAnchor),
+            serialNumberField.leadingAnchor.constraint(equalTo: valueField.leadingAnchor)
         ])
     }
     
