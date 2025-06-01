@@ -19,6 +19,9 @@ class DetailViewController: UIViewController {
     let nameField: UITextField = {
         let textField = UITextField()
         
+        textField.borderStyle = .roundedRect
+        textField.setContentCompressionResistancePriority(UILayoutPriority(749), for: .horizontal)
+        
         return textField
     }()
     
@@ -31,6 +34,9 @@ class DetailViewController: UIViewController {
     }()
     let serialNumberField: UITextField = {
         let textField = UITextField()
+        
+        textField.borderStyle = .roundedRect
+        textField.setContentCompressionResistancePriority(UILayoutPriority(749), for: .horizontal)
         
         return textField
     }()
@@ -45,12 +51,17 @@ class DetailViewController: UIViewController {
     let valueField: UITextField = {
         let textField = UITextField()
         
+        textField.borderStyle = .roundedRect
+        textField.setContentCompressionResistancePriority(UILayoutPriority(749), for: .horizontal)
+        
         return textField
     }()
     let dateLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Date Created"
+        label.textAlignment = .center
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
         
         return label
     }()
@@ -60,22 +71,39 @@ class DetailViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        let stackView = UIStackView(arrangedSubviews: [
-            nameLabel,
-            serialLabel,
-            valueLabel,
+        let nameStackView = UIStackView(arrangedSubviews: [nameLabel, nameField])
+        nameStackView.translatesAutoresizingMaskIntoConstraints = false
+        nameStackView.axis = .horizontal
+        nameStackView.spacing = 8
+        
+        let serialStackView = UIStackView(arrangedSubviews: [serialLabel, serialNumberField])
+        serialStackView.translatesAutoresizingMaskIntoConstraints = false
+        serialStackView.axis = .horizontal
+        serialStackView.spacing = 8
+        
+        let valueStackView = UIStackView(arrangedSubviews: [valueLabel, valueField])
+        valueStackView.translatesAutoresizingMaskIntoConstraints = false
+        valueStackView.axis = .horizontal
+        valueStackView.spacing = 8
+        
+        let verticalStackView = UIStackView(arrangedSubviews: [
+            nameStackView,
+            serialStackView,
+            valueStackView,
             dateLabel
         ])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(stackView)
+        verticalStackView.axis = .vertical
+        verticalStackView.spacing = 8
+        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(verticalStackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            verticalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            verticalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            verticalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            verticalStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])
     }
     
