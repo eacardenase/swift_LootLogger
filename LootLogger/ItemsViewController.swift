@@ -95,6 +95,15 @@ extension ItemsViewController {
 // MARK: - UITableViewDelegate
 
 extension ItemsViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentItem = itemStore.allItems[indexPath.row]
+        let detailViewController = DetailViewController(for: currentItem)
+        
+        detailViewController.item = currentItem
+        
+        present(detailViewController, animated: true)
+    }
 }
 
 // MARK: - TableViewHeaderDelegate

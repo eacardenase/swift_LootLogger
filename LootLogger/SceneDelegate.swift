@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         itemsViewController.itemStore = itemStore
         
         window?.makeKeyAndVisible()
-        window?.rootViewController = DetailViewController()
+        window?.rootViewController = itemsViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

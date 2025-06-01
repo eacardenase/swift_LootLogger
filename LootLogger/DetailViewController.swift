@@ -9,6 +9,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    var item: Item
+
     let nameLabel: UILabel = {
         let label = UILabel()
 
@@ -17,9 +19,10 @@ class DetailViewController: UIViewController {
 
         return label
     }()
-    let nameField: UITextField = {
+    lazy var nameField: UITextField = {
         let textField = UITextField()
 
+        textField.text = item.name
         textField.borderStyle = .roundedRect
         textField.setContentCompressionResistancePriority(
             UILayoutPriority(749),
@@ -36,9 +39,10 @@ class DetailViewController: UIViewController {
 
         return label
     }()
-    let serialNumberField: UITextField = {
+    lazy var serialNumberField: UITextField = {
         let textField = UITextField()
 
+        textField.text = item.serialNumber
         textField.borderStyle = .roundedRect
         textField.setContentCompressionResistancePriority(
             UILayoutPriority(749),
@@ -55,9 +59,10 @@ class DetailViewController: UIViewController {
 
         return label
     }()
-    let valueField: UITextField = {
+    lazy var valueField: UITextField = {
         let textField = UITextField()
 
+        textField.text = "\(item.valueInDollars)"
         textField.borderStyle = .roundedRect
         textField.setContentCompressionResistancePriority(
             UILayoutPriority(749),
@@ -66,15 +71,25 @@ class DetailViewController: UIViewController {
 
         return textField
     }()
-    let dateLabel: UILabel = {
+    lazy var dateLabel: UILabel = {
         let label = UILabel()
 
-        label.text = "Date Created"
+        label.text = item.dateCreated.ISO8601Format()
         label.textAlignment = .center
         label.setContentHuggingPriority(.defaultLow, for: .vertical)
 
         return label
     }()
+
+    init(for item: Item) {
+        self.item = item
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func loadView() {
         view = UIView()
