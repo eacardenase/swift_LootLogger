@@ -135,6 +135,8 @@ class DetailViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        view.endEditing(true)
 
         item.name = nameField.text ?? ""
         item.serialNumber = serialNumberField.text ?? ""
