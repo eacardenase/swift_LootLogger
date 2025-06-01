@@ -124,6 +124,13 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(backgroundTapped)
+        )
+
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -215,7 +222,15 @@ extension DetailViewController {
 extension DetailViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
+
         return true
+    }
+}
+
+// MARK: - Actions
+
+extension DetailViewController {
+    @objc func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
 }
