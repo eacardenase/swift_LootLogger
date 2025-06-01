@@ -22,8 +22,15 @@ class ItemsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        headerView.delegate = self
-        tableView.tableHeaderView = headerView
+        title = "LootLoger"
+
+        navigationItem.leftBarButtonItem = editButtonItem
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addNewItem)
+        )
 
         tableView.register(
             ItemCell.self,
@@ -95,34 +102,28 @@ extension ItemsViewController {
 // MARK: - UITableViewDelegate
 
 extension ItemsViewController {
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    override func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
         let currentItem = itemStore.allItems[indexPath.row]
         let detailViewController = DetailViewController(for: currentItem)
-        
+
         detailViewController.item = currentItem
-        
-        present(detailViewController, animated: true)
+
+        navigationController?.pushViewController(
+            detailViewController,
+            animated: true
+        )
     }
 }
 
-// MARK: - TableViewHeaderDelegate
+// MARK: - Actions
 
-extension ItemsViewController: TableViewHeaderDelegate {
+extension ItemsViewController {
 
-    func toggleEditingMode(_ sender: UIButton) {
-        if isEditing {
-            sender.setTitle("Edit", for: .normal)
-
-            setEditing(false, animated: true)
-        } else {
-            sender.setTitle("Done", for: .normal)
-
-            setEditing(true, animated: true)
-        }
-    }
-
-    func addNewItem(_ sender: UIButton) {
+    @objc func addNewItem(_ sender: UIBarButtonItem) {
         let newItem = itemStore.createItem()
 
         if let index = itemStore.allItems.firstIndex(of: newItem) {
