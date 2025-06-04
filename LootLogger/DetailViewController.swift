@@ -87,6 +87,7 @@ class DetailViewController: UIViewController {
         )
         textField.borderStyle = .roundedRect
         textField.keyboardType = .decimalPad
+        textField.delegate = self
         textField.setContentCompressionResistancePriority(
             UILayoutPriority(749),
             for: .horizontal
@@ -124,7 +125,7 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.title = item.name
 
         let tapGestureRecognizer = UITapGestureRecognizer(
@@ -228,6 +229,35 @@ extension DetailViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
 
         return true
+    }
+
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        let currentLocale = Locale.current
+        let decimalSeparator = currentLocale.decimalSeparator ?? "."
+
+        let existingTextHasDecimalSeparator = textField.text?.range(
+            of: decimalSeparator
+        )
+        let replacementTextHasDecimalSeparator = string.range(
+            of: decimalSeparator
+        )
+        let replacingTextHasAlphabeticalCharacters = string.rangeOfCharacter(
+            from: CharacterSet.letters
+        )
+
+        if replacingTextHasAlphabeticalCharacters != nil
+            || existingTextHasDecimalSeparator != nil
+                && replacementTextHasDecimalSeparator != nil
+        {
+            return false
+        }
+
+        return true
+
     }
 }
 
