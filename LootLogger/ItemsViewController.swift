@@ -22,7 +22,7 @@ class ItemsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "LootLoger"
+        navigationItem.title = "LootLoger"
 
         navigationItem.leftBarButtonItem = editButtonItem
 
@@ -37,10 +37,10 @@ class ItemsViewController: UITableViewController {
             forCellReuseIdentifier: NSStringFromClass(ItemCell.self)
         )
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         tableView.reloadData()
     }
 }
