@@ -124,6 +124,8 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = item.name
 
         let tapGestureRecognizer = UITapGestureRecognizer(
             target: self,
