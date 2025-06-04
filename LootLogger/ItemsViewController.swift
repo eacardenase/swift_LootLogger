@@ -25,7 +25,7 @@ class ItemsViewController: UITableViewController {
         navigationItem.title = "LootLoger"
 
         navigationItem.leftBarButtonItem = editButtonItem
-
+        navigationItem.backButtonTitle = "Back"
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
