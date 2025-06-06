@@ -9,6 +9,18 @@ import Foundation
 
 class ItemStore {
     private(set) var allItems = [Item]()
+    private let itemArchiveURL: URL = {
+        let documentsDirectories = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        )
+        let documentDirectory = documentsDirectories.first!
+
+        return documentDirectory.appendingPathComponent(
+            "items.plist",
+            conformingTo: .propertyList
+        )
+    }()
 
     @discardableResult func createItem() -> Item {
         let newItem = Item(random: true)
