@@ -5,7 +5,7 @@
 //  Created by Edwin Cardenas on 5/26/25.
 //
 
-import Foundation
+import UIKit
 
 class ItemStore {
     private(set) var allItems = [Item]()
@@ -21,6 +21,17 @@ class ItemStore {
             conformingTo: .propertyList
         )
     }()
+
+    init() {
+        let notificationCenter = NotificationCenter.default
+
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(saveChanges),
+            name: UIScene.didEnterBackgroundNotification,
+            object: nil
+        )
+    }
 
     @discardableResult func createItem() -> Item {
         let newItem = Item(random: true)
@@ -48,7 +59,7 @@ class ItemStore {
         allItems.insert(movedItem, at: toIndex)
     }
 
-    func saveChanges() -> Bool {
+    @objc func saveChanges() -> Bool {
         print("Saving items to: \(itemArchiveURL)")
 
         do {
