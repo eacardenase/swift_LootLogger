@@ -116,8 +116,6 @@ extension ItemsViewController {
         let currentItem = itemStore.allItems[indexPath.row]
         let detailViewController = DetailViewController(for: currentItem)
 
-        detailViewController.item = currentItem
-
         navigationController?.pushViewController(
             detailViewController,
             animated: true
