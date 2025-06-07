@@ -212,11 +212,11 @@ extension DetailViewController {
                 constant: 16
             ),
             verticalStackView.leadingAnchor.constraint(
-                equalTo: view.leadingAnchor,
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                 constant: 16
             ),
             verticalStackView.trailingAnchor.constraint(
-                equalTo: view.trailingAnchor,
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                 constant: -16
             ),
             verticalStackView.bottomAnchor.constraint(
