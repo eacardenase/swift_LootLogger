@@ -252,6 +252,17 @@ extension DetailViewController {
             ),
         ])
     }
+
+    private func imagePicker(for sourceType: UIImagePickerController.SourceType)
+        -> UIImagePickerController
+    {
+        let imagePicker = UIImagePickerController()
+
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+
+        return imagePicker
+    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -310,25 +321,48 @@ extension DetailViewController {
         alertController.modalPresentationStyle = .popover
         alertController.popoverPresentationController?.sourceItem = sender
 
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) {
-            _ in
-            print("DEBUG: Present camera action")
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) {
+                _ in
+
+                let imagePickerController = self.imagePicker(
+                    for: .camera
+                )
+
+                self.present(imagePickerController, animated: true)
+            }
+
+            alertController.addAction(cameraAction)
         }
+
         let photoLibraryAction = UIAlertAction(
             title: "Photo Library",
             style: .default
         ) { _ in
-            print("DEBUG: Present photo library action")
+
+            let imagePickerController = self.imagePicker(
+                for: .photoLibrary
+            )
+            
+            imagePickerController.modalPresentationStyle = .popover
+            imagePickerController.popoverPresentationController?.sourceItem = sender
+
+            self.present(imagePickerController, animated: true)
         }
         let cancelAction = UIAlertAction(
             title: "Cancel",
             style: .cancel
         )
 
-        alertController.addAction(cameraAction)
         alertController.addAction(photoLibraryAction)
         alertController.addAction(cancelAction)
 
         present(alertController, animated: true)
     }
+}
+
+extension DetailViewController: UINavigationControllerDelegate,
+    UIImagePickerControllerDelegate
+{
+
 }
