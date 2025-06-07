@@ -284,6 +284,31 @@ extension DetailViewController {
     }
 
     @objc func choosePhotoSource(_ sender: UIBarButtonItem) {
-        print(#function)
+        let alertController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) {
+            _ in
+            print("DEBUG: Present camera action")
+        }
+        let photoLibraryAction = UIAlertAction(
+            title: "Photo Library",
+            style: .default
+        ) { _ in
+            print("DEBUG: Present photo library action")
+        }
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .cancel
+        )
+
+        alertController.addAction(cameraAction)
+        alertController.addAction(photoLibraryAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true)
     }
 }
