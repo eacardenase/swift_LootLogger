@@ -290,6 +290,9 @@ extension DetailViewController {
             preferredStyle: .actionSheet
         )
 
+        alertController.modalPresentationStyle = .popover
+        alertController.popoverPresentationController?.sourceItem = sender
+
         let cameraAction = UIAlertAction(title: "Camera", style: .default) {
             _ in
             print("DEBUG: Present camera action")
