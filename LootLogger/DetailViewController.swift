@@ -100,9 +100,25 @@ class DetailViewController: UIViewController {
 
         label.text = dateFormatter.string(from: item.dateCreated)
         label.textAlignment = .center
-        label.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.setContentHuggingPriority(UILayoutPriority(249), for: .vertical)
 
         return label
+    }()
+
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+
+        imageView.setContentHuggingPriority(
+            UILayoutPriority(248),
+            for: .vertical
+        )
+        imageView.setContentCompressionResistancePriority(
+            UILayoutPriority(749),
+            for: .vertical
+        )
+        imageView.contentMode = .scaleAspectFit
+
+        return imageView
     }()
 
     init(for item: Item) {
@@ -197,6 +213,7 @@ extension DetailViewController {
             serialStackView,
             valueStackView,
             dateLabel,
+            imageView,
         ])
 
         verticalStackView.axis = .vertical
