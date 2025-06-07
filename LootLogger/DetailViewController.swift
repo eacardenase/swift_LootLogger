@@ -123,6 +123,12 @@ class DetailViewController: UIViewController {
         setupViews()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.isToolbarHidden = false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -134,12 +140,21 @@ class DetailViewController: UIViewController {
         )
 
         view.addGestureRecognizer(tapGestureRecognizer)
+
+        toolbarItems = [
+            UIBarButtonItem(
+                barButtonSystemItem: .camera,
+                target: self,
+                action: #selector(choosePhotoSource)
+            )
+        ]
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         view.endEditing(true)
+        navigationController?.isToolbarHidden = true
 
         item.name = nameField.text ?? ""
         item.serialNumber = serialNumberField.text ?? ""
@@ -266,5 +281,9 @@ extension DetailViewController: UITextFieldDelegate {
 extension DetailViewController {
     @objc func backgroundTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+
+    @objc func choosePhotoSource(_ sender: UIBarButtonItem) {
+        print(#function)
     }
 }
