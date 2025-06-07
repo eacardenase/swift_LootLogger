@@ -343,9 +343,10 @@ extension DetailViewController {
             let imagePickerController = self.imagePicker(
                 for: .photoLibrary
             )
-            
+
             imagePickerController.modalPresentationStyle = .popover
-            imagePickerController.popoverPresentationController?.sourceItem = sender
+            imagePickerController.popoverPresentationController?.sourceItem =
+                sender
 
             self.present(imagePickerController, animated: true)
         }
@@ -364,5 +365,15 @@ extension DetailViewController {
 extension DetailViewController: UINavigationControllerDelegate,
     UIImagePickerControllerDelegate
 {
-
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey:
+            Any]
+    ) {
+        let image = info[.originalImage] as! UIImage
+        
+        imageView.image = image
+        
+        dismiss(animated: true)
+    }
 }
