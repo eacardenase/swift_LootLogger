@@ -288,19 +288,15 @@ extension DetailViewController: UITextFieldDelegate {
         let replacementTextHasDecimalSeparator = string.range(
             of: decimalSeparator
         )
-        let replacingTextHasAlphabeticalCharacters = string.rangeOfCharacter(
-            from: CharacterSet.letters
-        )
 
-        if replacingTextHasAlphabeticalCharacters != nil
-            || existingTextHasDecimalSeparator != nil
-                && replacementTextHasDecimalSeparator != nil
+        if existingTextHasDecimalSeparator != nil
+            && replacementTextHasDecimalSeparator != nil
         {
+
             return false
         }
 
         return true
-
     }
 }
 
