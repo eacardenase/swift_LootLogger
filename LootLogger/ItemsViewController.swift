@@ -44,6 +44,8 @@ class ItemsViewController: UITableViewController {
             action: #selector(addNewItem)
         )
 
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 65
         tableView.register(
             ItemCell.self,
             forCellReuseIdentifier: NSStringFromClass(ItemCell.self)
@@ -100,7 +102,7 @@ extension ItemsViewController {
             let item = itemStore.allItems[indexPath.row]
 
             itemStore.removeItem(item)
-            
+
             imageStore.deleteImage(forKey: item.itemKey)
 
             tableView.deleteRows(at: [indexPath], with: .fade)

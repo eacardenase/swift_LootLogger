@@ -268,6 +268,7 @@ extension DetailViewController {
 
         imagePicker.sourceType = sourceType
         imagePicker.delegate = self
+        imagePicker.allowsEditing = true
 
         return imagePicker
     }
