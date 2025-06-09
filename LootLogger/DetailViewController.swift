@@ -370,6 +370,8 @@ extension DetailViewController: UINavigationControllerDelegate,
     ) {
         let image = info[.originalImage] as! UIImage
         
+        imageStore.setImage(image, forKey: item.itemKey)
+        
         imageView.image = image
         
         dismiss(animated: true)
