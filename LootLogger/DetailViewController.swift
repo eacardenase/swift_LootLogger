@@ -10,6 +10,7 @@ import UIKit
 class DetailViewController: UIViewController {
 
     var item: Item
+    var imageStore: ImageStore
 
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -121,8 +122,9 @@ class DetailViewController: UIViewController {
         return imageView
     }()
 
-    init(for item: Item) {
+    init(for item: Item, with imageStore: ImageStore) {
         self.item = item
+        self.imageStore = imageStore
 
         super.init(nibName: nil, bundle: nil)
     }

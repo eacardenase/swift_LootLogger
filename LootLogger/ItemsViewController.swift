@@ -9,7 +9,8 @@ import UIKit
 
 class ItemsViewController: UITableViewController {
 
-    var itemStore: ItemStore!
+    var itemStore: ItemStore
+    var imageStore: ImageStore
 
     var headerView: TableViewHeader = {
         let view = TableViewHeader(
@@ -18,6 +19,17 @@ class ItemsViewController: UITableViewController {
 
         return view
     }()
+
+    init(itemStore: ItemStore, imageStore: ImageStore) {
+        self.itemStore = itemStore
+        self.imageStore = imageStore
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +126,10 @@ extension ItemsViewController {
         didSelectRowAt indexPath: IndexPath
     ) {
         let currentItem = itemStore.allItems[indexPath.row]
-        let detailViewController = DetailViewController(for: currentItem)
+        let detailViewController = DetailViewController(
+            for: currentItem,
+            with: imageStore
+        )
 
         navigationController?.pushViewController(
             detailViewController,

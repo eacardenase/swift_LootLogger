@@ -17,15 +17,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
-        
+
         window = UIWindow(windowScene: scene)
-        
+
         let itemStore = ItemStore()
-        
-        let itemsViewController = ItemsViewController()
-        itemsViewController.itemStore = itemStore
-        
-        let navigationController = UINavigationController(rootViewController: itemsViewController)
+        let imageStore = ImageStore()
+
+        let itemsViewController = ItemsViewController(
+            itemStore: itemStore,
+            imageStore: imageStore
+        )
+        let navigationController = UINavigationController(
+            rootViewController: itemsViewController
+        )
 
         window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
@@ -59,6 +63,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
 }
-
