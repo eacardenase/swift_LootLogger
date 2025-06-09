@@ -145,6 +145,12 @@ class DetailViewController: UIViewController {
         super.viewWillAppear(animated)
 
         navigationController?.isToolbarHidden = false
+        
+        if let itemImage = imageStore.image(forKey: item.itemKey) {
+            imageView.image = itemImage
+        } else {
+            imageView.image = UIImage(systemName: "photo")
+        }
     }
 
     override func viewDidLoad() {
