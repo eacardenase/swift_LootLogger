@@ -122,6 +122,8 @@ class DetailViewController: UIViewController {
         return imageView
     }()
 
+    // MARK: - Initializers
+
     init(for item: Item, with imageStore: ImageStore) {
         self.item = item
         self.imageStore = imageStore
@@ -132,6 +134,8 @@ class DetailViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - View Lifecycle
 
     override func loadView() {
         view = UIView()
@@ -145,7 +149,7 @@ class DetailViewController: UIViewController {
         super.viewWillAppear(animated)
 
         navigationController?.isToolbarHidden = false
-        
+
         if let itemImage = imageStore.image(forKey: item.itemKey) {
             imageView.image = itemImage
         } else {
@@ -376,11 +380,11 @@ extension DetailViewController: UINavigationControllerDelegate,
             Any]
     ) {
         let image = info[.originalImage] as! UIImage
-        
+
         imageStore.setImage(image, forKey: item.itemKey)
-        
+
         imageView.image = image
-        
+
         dismiss(animated: true)
     }
 }
