@@ -220,37 +220,42 @@ extension DetailViewController {
         valueStackView.axis = .horizontal
         valueStackView.spacing = 8
 
-        let verticalStackView = UIStackView(arrangedSubviews: [
+        let formStackView = UIStackView(arrangedSubviews: [
             nameStackView,
             serialStackView,
             valueStackView,
             dateLabel,
-            imageView,
         ])
 
-        verticalStackView.axis = .vertical
-        verticalStackView.spacing = 8
-        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        formStackView.axis = .vertical
+        formStackView.spacing = 8
 
-        view.addSubview(verticalStackView)
+        let adaptiveStackView = UIStackView(arrangedSubviews: [
+            formStackView, imageView,
+        ])
+        adaptiveStackView.translatesAutoresizingMaskIntoConstraints = false
+        adaptiveStackView.axis = .vertical
+        adaptiveStackView.spacing = 8
 
-        // verticalStackView
+        view.addSubview(adaptiveStackView)
+
+        // adaptiveStackView
         NSLayoutConstraint.activate([
-            verticalStackView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 16
+            adaptiveStackView.topAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.topAnchor,
+                constant: 8
             ),
-            verticalStackView.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                constant: 16
+            adaptiveStackView.leadingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leadingAnchor,
+                constant: 0
             ),
-            verticalStackView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                constant: -16
+            adaptiveStackView.trailingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.trailingAnchor,
+                constant: 0
             ),
-            verticalStackView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                constant: -16
+            adaptiveStackView.bottomAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.bottomAnchor,
+                constant: -8
             ),
         ])
 
