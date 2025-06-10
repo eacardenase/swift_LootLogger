@@ -122,6 +122,22 @@ class DetailViewController: UIViewController {
         return imageView
     }()
 
+    let adaptiveStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 8
+
+        if UITraitCollection.current.verticalSizeClass == .compact {
+            stackView.axis = .horizontal
+            stackView.distribution = .fillEqually
+        } else {
+            stackView.axis = .vertical
+            stackView.distribution = .fill
+        }
+
+        return stackView
+    }()
+
     // MARK: - Initializers
 
     init(for item: Item, with imageStore: ImageStore) {
@@ -176,6 +192,13 @@ class DetailViewController: UIViewController {
                 action: #selector(choosePhotoSource)
             )
         ]
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(rotated),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -230,12 +253,8 @@ extension DetailViewController {
         formStackView.axis = .vertical
         formStackView.spacing = 8
 
-        let adaptiveStackView = UIStackView(arrangedSubviews: [
-            formStackView, imageView,
-        ])
-        adaptiveStackView.translatesAutoresizingMaskIntoConstraints = false
-        adaptiveStackView.axis = .vertical
-        adaptiveStackView.spacing = 8
+        adaptiveStackView.addArrangedSubview(formStackView)
+        adaptiveStackView.addArrangedSubview(imageView)
 
         view.addSubview(adaptiveStackView)
 
@@ -373,6 +392,16 @@ extension DetailViewController {
         alertController.addAction(cancelAction)
 
         present(alertController, animated: true)
+    }
+
+    @objc func rotated() {
+        if UIDevice.current.orientation.isLandscape {
+            adaptiveStackView.axis = .horizontal
+            adaptiveStackView.distribution = .fillEqually
+        } else {
+            adaptiveStackView.axis = .vertical
+            adaptiveStackView.distribution = .fill
+        }
     }
 }
 
