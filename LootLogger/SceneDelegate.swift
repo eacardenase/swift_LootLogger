@@ -31,6 +31,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             rootViewController: itemsViewController
         )
 
+        let navigationBar = navigationController.navigationBar
+
+        navigationBar.standardAppearance.backgroundColor = UIColor(
+            named: "Secondary Brand Fill Color"
+        )
+        navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance
+
         window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
     }
