@@ -48,6 +48,7 @@ class DetailViewController: UIViewController {
             UILayoutPriority(749),
             for: .horizontal
         )
+        textField.backgroundColor = UIColor.tertiarySystemFill
 
         return textField
     }()
@@ -69,6 +70,7 @@ class DetailViewController: UIViewController {
             UILayoutPriority(749),
             for: .horizontal
         )
+        textField.backgroundColor = UIColor.tertiarySystemFill
 
         return textField
     }()
@@ -93,6 +95,7 @@ class DetailViewController: UIViewController {
             UILayoutPriority(749),
             for: .horizontal
         )
+        textField.backgroundColor = UIColor.tertiarySystemFill
 
         return textField
     }()
