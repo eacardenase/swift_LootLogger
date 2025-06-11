@@ -48,6 +48,7 @@ class ItemsViewController: UITableViewController {
             action: #selector(addNewItem)
         )
 
+        tableView.backgroundColor = UIColor(named: "Primary Brand Fill Color")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 65
         tableView.register(

@@ -49,6 +49,8 @@ class ItemCell: UITableViewCell {
 
 extension ItemCell {
     func setupViews() {
+        backgroundColor = UIColor(named: "Primary Brand Fill Color")
+        
         let stackView = UIStackView(arrangedSubviews: [
             nameLabel, serialNumberLabel,
         ])
