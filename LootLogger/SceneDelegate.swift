@@ -38,6 +38,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
         navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance
 
+        window?.tintColor = UIColor(
+            named: "Brand Accent Color"
+        )
         window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
     }
