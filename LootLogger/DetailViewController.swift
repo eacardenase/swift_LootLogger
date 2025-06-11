@@ -156,7 +156,7 @@ class DetailViewController: UIViewController {
     override func loadView() {
         view = UIView()
 
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "Primary Brand Fill Color")
 
         setupViews()
     }
@@ -192,6 +192,12 @@ class DetailViewController: UIViewController {
                 action: #selector(choosePhotoSource)
             )
         ]
+
+        let toolbar = navigationController?.toolbar
+        toolbar?.standardAppearance.backgroundColor = UIColor(
+            named: "Secondary Brand Fill Color"
+        )
+        toolbar?.scrollEdgeAppearance = toolbar?.standardAppearance
 
         NotificationCenter.default.addObserver(
             self,
